@@ -25,12 +25,12 @@ public class HealthController {
 
             body.put("status", HttpStatus.OK.value());
             body.put("database", "connected");
-            return ResponseEntity.ok(body);
+            return ResponseEntity.ok().header("Cache-Control", "no-cache").body(body);
         } catch (Exception ex) {
             body.put("status", HttpStatus.SERVICE_UNAVAILABLE.value());
             body.put("database", "disconnected");
             body.put("error", "Fail to connect to Database");
-            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(body);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).header("Cache-Control", "no-cache").body(body);
         }
     }
 
